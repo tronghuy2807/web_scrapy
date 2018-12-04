@@ -9,6 +9,12 @@ import scrapy
 
 
 class FashionCrapyItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+    product_name = scrapy.Field()
+    gender_cat = scrapy.Field()
+    product_cat = scrapy.Field()
+    product_subcat = scrapy.Field()
+    brand = scrapy.Field()
+    brand_cat = scrapy.Field()
+    product_price = scrapy.Field()
+    file_urls = scrapy.Field()
+

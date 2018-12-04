@@ -1,22 +1,29 @@
 # -*- coding: utf-8 -*-
 import scrapy
-#from scrapy.linkextractors.lxmlhtml import LxmlLinkExtractor
-from scrapy.contrib.linkextractors import LinkExtractor
-from scrapy.item import Item, Field
+import re
+import json
+import yaml
+from ..items import FashionCrapyItem
 
-class MyItem(Item):
-    url= Field()
 
 class RobinSpider(scrapy.Spider):
     name = 'robin'
-
-    def start_requests(self):
-        url = "https://www.robins.vn/92wear-dam-so-mi-beo-duoi-ca-3-tang-xanh-d%C6%B0%C6%A1ng-832227.html/"
-        yield scrapy.Request(url, self.parse)
+    # sitemap_urls = ['https://www.robins.vn/product-sitemap-2.xml']
+    start_urls = ["https://www.robins.vn/neo-bag-tui-hop-day-xich-dinh-nhu-thoi-trang-n%C3%A2u-821143.html"]
 
     def parse(self, response):
-        item = MyItem()
-        item['url'] = []
-        for image in response.xpath('//img/@src').extract():
-            item['url'].append(response.urljoin(image))
-            print item
+        data = re.findall("dataLayer =(.+?);\n", response.body, re.S)
+        data_json = yaml.safe_load(data[0])
+        images = response.xpath("//*[contains(@class, 'prd-imageBoxLayout ui-border')]//img/@src")
+        image_urls = images.extract()
+        x = image_urls[0]  # .split("(ffffff)/")[1]
+        yield FashionCrapyItem(
+            product_name=data_json[0]['Product_Name'],
+            gender_cat=data_json[0]['Gender_Category'],
+            product_cat=data_json[0]['Product_Category'],
+            product_subcat=data_json[0]['Product_Subcategory'],
+            brand=data_json[0]['Brand'],
+            brand_cat=data_json[0]['Brand_Category'],
+            product_price=data_json[0]['Product_Price'],
+            file_urls=[x]
+        )

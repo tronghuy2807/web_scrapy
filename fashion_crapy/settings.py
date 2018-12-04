@@ -21,6 +21,8 @@ NEWSPIDER_MODULE = 'fashion_crapy.spiders'
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
 
+
+
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 #CONCURRENT_REQUESTS = 32
 
@@ -64,9 +66,11 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'fashion_crapy.pipelines.FashionCrapyPipeline': 300,
-#}
+ITEM_PIPELINES = {
+#    'sugarcanespyder.pipelines.SugarcanespyderPipeline': 300,
+    'scrapy.contrib.pipeline.images.FilesPipeline': 1,
+
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
@@ -88,3 +92,6 @@ ROBOTSTXT_OBEY = True
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+# Directory where files will be downloaded
+FILES_STORE = "/home/huydt/working/web_scrapy"
