@@ -16,5 +16,8 @@ class FashionCrapyItem(scrapy.Item):
     brand = scrapy.Field()
     brand_cat = scrapy.Field()
     product_price = scrapy.Field()
+    discount = scrapy.Field()
+    color = scrapy.Field()
+    product_url = scrapy.Field()
     file_urls = scrapy.Field()
 

@@ -68,9 +68,14 @@ ROBOTSTXT_OBEY = True
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
 #    'sugarcanespyder.pipelines.SugarcanespyderPipeline': 300,
-    'scrapy.contrib.pipeline.images.FilesPipeline': 1,
+    'scrapy.pipelines.images.FilesPipeline': 1,
+    'fashion_crapy.pipelines.MongoDBPipeline':100
 
 }
+MONGODB_SERVER = "localhost"
+MONGODB_PORT = 27017
+MONGODB_DB = "robin"
+MONGODB_COLLECTION = "fashion"
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
