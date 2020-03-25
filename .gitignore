@@ -1,0 +1,5 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea/encodings.xml
+fashion_crapy/items.pyc
+fashion_crapy/pipelines.pyc
+venv/
